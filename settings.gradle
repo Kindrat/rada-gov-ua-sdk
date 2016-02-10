@@ -1,0 +1,3 @@
+rootProject.name = 'rada-gov-ua-sdk'
+include 'shared'
+
