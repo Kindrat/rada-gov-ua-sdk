@@ -1,7 +1,12 @@
+plugins {
+    id 'nebula.optional-base' version '3.0.3'
+}
+
 group 'com.github.kindrat.rada-gov-ua-sdk'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'nebula.optional-base'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
