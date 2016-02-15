@@ -1,4 +1,4 @@
-package com.github.kindrat.radagovuasdk.shared;
+package com.github.kindrat.radagovuasdk.client;
 
 import lombok.Value;
 
