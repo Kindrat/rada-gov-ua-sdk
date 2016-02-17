@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientConfiguration {
-    private String baseUri;
+    private String baseUri = "zakon3.rada.gov.ua";
+    private String rootMenu = "laws/main/n/stru2";
 }
