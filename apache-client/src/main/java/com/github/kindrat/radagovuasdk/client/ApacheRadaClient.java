@@ -21,17 +21,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.github.kindrat.radagovuasdk.Patterns.*;
 import static com.github.kindrat.radagovuasdk.util.ParsingUtil.streamFromMatcher;
 
 @Slf4j
 public class ApacheRadaClient implements RadaClient {
-    private static final Pattern MENU_LINE_PATTERN = Pattern.compile("(<b>)(.*)(</a>)");
-    private static final Pattern MENU_URL_PATTERN = Pattern.compile("laws.*=\\d+");
-    private static final Pattern MENU_TITLE_PATTERN = Pattern.compile("(.*)(</b>)");
-
     private final CloseableHttpClient httpClient;
     private final ClientConfiguration configuration;
 
@@ -43,8 +39,8 @@ public class ApacheRadaClient implements RadaClient {
     @Override
     public List<ListItem> listAllCategories() {
         HttpGet get = new HttpGet(new UriSupplier(configuration.getBaseUri(), configuration.getRootMenu()).get());
-        return doRequestAndParseResponse(get, httpEntity -> {
-            Document document = ParsingUtil.wrapHttpEntity(httpEntity);
+        return doRequestAndParseResponse(get, entity -> {
+            Document document = ParsingUtil.wrapHttpEntity(entity);
             Element menu = document.getElementsByTag("table").stream()
                     .filter(element -> element.hasClass("num") && element.attributes().get("bgcolor").equals("white"))
                     .findAny()
@@ -61,8 +57,26 @@ public class ApacheRadaClient implements RadaClient {
     }
 
     @Override
-    public List<ListItem> listCategory(String category) {
-        return null;
+    public List<ListItem> listCategory(ListItem category) {
+        HttpGet get = new HttpGet(new UriSupplier(configuration.getBaseUri(), category.getUri()).get());
+        return doRequestAndParseResponse(get, entity -> {
+            Document document = ParsingUtil.wrapHttpEntity(entity);
+            return document.getElementsByClass("nam").stream()
+                    .flatMap(element -> element.children().stream())
+                    .flatMap(element -> element.children().stream())
+                    .flatMap(element -> element.children().stream())
+                    .map(Element::html)
+                    .map(string -> {
+                        log.debug("Parsing category element : {}", string);
+                        Matcher uriMatcher = LINK_PATTERN.matcher(string);
+                        if (!uriMatcher.find()) {
+                            throw new RestClientException("Could not parse category content entry " + string);
+                        }
+                        String uri = Optional.ofNullable(uriMatcher.group(2)).orElse("");
+                        String title = Optional.ofNullable(uriMatcher.group(5)).orElse("");
+                        return new ListItem(title, uri);
+                    }).collect(Collectors.toList());
+        });
     }
 
     private <T> T doRequestAndParseResponse(HttpUriRequest request, Function<HttpEntity, T> parseFunction) throws RestClientException {
