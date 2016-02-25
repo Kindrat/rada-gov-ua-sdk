@@ -79,6 +79,11 @@ public class ApacheRadaClient implements RadaClient {
         });
     }
 
+    @Override
+    public String getEntryContent(ListItem categoryEntry) {
+        return null;
+    }
+
     private <T> T doRequestAndParseResponse(HttpUriRequest request, Function<HttpEntity, T> parseFunction) throws RestClientException {
         try (CloseableHttpResponse response = executeRequest(request)) {
             checkResponseWasSuccessful(request, response);
