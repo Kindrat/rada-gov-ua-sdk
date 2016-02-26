@@ -1,9 +1,6 @@
 package com.github.kindrat.radagovuasdk.client;
 
-import com.github.kindrat.radagovuasdk.client.dto.DocumentCard;
-import com.github.kindrat.radagovuasdk.client.dto.DocumentEntry;
-import com.github.kindrat.radagovuasdk.client.dto.HistoryEntry;
-import com.github.kindrat.radagovuasdk.client.dto.ListItem;
+import com.github.kindrat.radagovuasdk.client.dto.*;
 import com.github.kindrat.radagovuasdk.exceptions.RestClientException;
 import com.github.kindrat.radagovuasdk.util.ParsingUtil;
 import com.google.common.base.Charsets;
@@ -94,7 +91,12 @@ public class ApacheRadaClient implements RadaClient {
     }
 
     @Override
-    public List<ListItem> listEntryFiles(DocumentEntry categoryEntry) {
+    public RelatedDocsLink getLinkToRelatedDocs(DocumentEntry documentEntry) {
+        return null;
+    }
+
+    @Override
+    public List<DocumentEntry> listEntryFiles(RelatedDocsLink relatedDocsLink) {
         return null;
     }
 

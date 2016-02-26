@@ -1,9 +1,6 @@
 package com.github.kindrat.radagovuasdk.client;
 
-import com.github.kindrat.radagovuasdk.client.dto.DocumentEntry;
-import com.github.kindrat.radagovuasdk.client.dto.DocumentCard;
-import com.github.kindrat.radagovuasdk.client.dto.HistoryEntry;
-import com.github.kindrat.radagovuasdk.client.dto.ListItem;
+import com.github.kindrat.radagovuasdk.client.dto.*;
 
 import java.util.List;
 
@@ -36,11 +33,19 @@ public interface RadaClient {
     DocumentCard getEntryCard(DocumentEntry categoryEntry);
 
     /**
+     * Each document has a list (almost each) of other documents related to a same topic. Since this list is located
+     * at a separate page under document page, there is a separate method to retrieve this link
+     * @param documentEntry item metadata
+     * @return link to related docs
+     */
+    RelatedDocsLink getLinkToRelatedDocs(DocumentEntry documentEntry);
+
+    /**
      * Get list of entry-related files
-     * @param categoryEntry item metadata
+     * @param relatedDocsLink link to a page with related docs list
      * @return list of items, describing item files
      */
-    List<ListItem> listEntryFiles(DocumentEntry categoryEntry);
+    List<DocumentEntry> listEntryFiles(RelatedDocsLink relatedDocsLink);
 
     /**
      * Get document lifecycle history
