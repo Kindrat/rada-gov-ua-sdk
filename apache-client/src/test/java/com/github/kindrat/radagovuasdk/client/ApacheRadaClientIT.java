@@ -1,5 +1,6 @@
 package com.github.kindrat.radagovuasdk.client;
 
+import com.github.kindrat.radagovuasdk.client.dto.ListItem;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,5 +1,7 @@
 package com.github.kindrat.radagovuasdk.client;
 
+import com.github.kindrat.radagovuasdk.client.dto.ListItem;
+
 import java.util.List;
 
 public interface RadaClient {
