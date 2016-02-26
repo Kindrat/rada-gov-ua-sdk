@@ -1,5 +1,8 @@
 package com.github.kindrat.radagovuasdk.client;
 
+import com.github.kindrat.radagovuasdk.client.dto.DocumentCard;
+import com.github.kindrat.radagovuasdk.client.dto.DocumentEntry;
+import com.github.kindrat.radagovuasdk.client.dto.HistoryEntry;
 import com.github.kindrat.radagovuasdk.client.dto.ListItem;
 import com.github.kindrat.radagovuasdk.exceptions.RestClientException;
 import com.github.kindrat.radagovuasdk.util.ParsingUtil;
@@ -58,7 +61,7 @@ public class ApacheRadaClient implements RadaClient {
     }
 
     @Override
-    public List<ListItem> listCategory(ListItem category) {
+    public List<DocumentEntry> listCategory(ListItem category) {
         HttpGet get = new HttpGet(new UriSupplier(configuration.getBaseUri(), category.getUri()).get());
         return doRequestAndParseResponse(get, entity -> {
             Document document = ParsingUtil.wrapHttpEntity(entity);
@@ -75,13 +78,28 @@ public class ApacheRadaClient implements RadaClient {
                         }
                         String uri = Optional.ofNullable(uriMatcher.group(2)).orElse("");
                         String title = Optional.ofNullable(uriMatcher.group(5)).orElse("");
-                        return new ListItem(title, uri);
+                        return new DocumentEntry(title, uri);
                     }).collect(Collectors.toList());
         });
     }
 
     @Override
-    public String getEntryContent(ListItem categoryEntry) {
+    public String getEntryContent(DocumentEntry categoryEntry) {
+        return null;
+    }
+
+    @Override
+    public DocumentCard getEntryCard(DocumentEntry categoryEntry) {
+        return null;
+    }
+
+    @Override
+    public List<ListItem> listEntryFiles(DocumentEntry categoryEntry) {
+        return null;
+    }
+
+    @Override
+    public List<HistoryEntry> listEntryHistory(DocumentEntry categoryEntry) {
         return null;
     }
 

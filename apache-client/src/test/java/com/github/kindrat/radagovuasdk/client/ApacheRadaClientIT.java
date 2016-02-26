@@ -1,5 +1,6 @@
 package com.github.kindrat.radagovuasdk.client;
 
+import com.github.kindrat.radagovuasdk.client.dto.DocumentEntry;
 import com.github.kindrat.radagovuasdk.client.dto.ListItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApacheRadaClientIT {
     private static final ClientConfiguration config = new ClientConfiguration();
-    private ApacheRadaClient client;
+    private RadaClient client;
 
     @Before
     public void setUp() throws Exception {
@@ -27,7 +28,7 @@ public class ApacheRadaClientIT {
     @Test
     public void getCategoryContent() throws Exception {
         client.listAllCategories().forEach(listItem -> {
-            List<ListItem> categoryContent = client.listCategory(listItem);
+            List<DocumentEntry> categoryContent = client.listCategory(listItem);
             assertThat(categoryContent).isNotNull().isNotEmpty();
             print(listItem.getTitle(), categoryContent);
         });

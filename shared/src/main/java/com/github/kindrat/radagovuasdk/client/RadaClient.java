@@ -1,5 +1,6 @@
 package com.github.kindrat.radagovuasdk.client;
 
+import com.github.kindrat.radagovuasdk.client.dto.DocumentEntry;
 import com.github.kindrat.radagovuasdk.client.dto.DocumentCard;
 import com.github.kindrat.radagovuasdk.client.dto.HistoryEntry;
 import com.github.kindrat.radagovuasdk.client.dto.ListItem;
@@ -18,33 +19,33 @@ public interface RadaClient {
      * @param category category (including title and uri)
      * @return list of items, including human readable title and category uri
      */
-    List<ListItem> listCategory(ListItem category);
+    List<DocumentEntry> listCategory(ListItem category);
 
     /**
      * Get single document by its metadata
      * @param categoryEntry item metadata
      * @return document as a string (including html tags)
      */
-    String getEntryContent(ListItem categoryEntry);
+    String getEntryContent(DocumentEntry categoryEntry);
 
     /**
      * Get single document metadata
      * @param categoryEntry item metadata
      * @return metadata
      */
-    DocumentCard getEntryCard(ListItem categoryEntry);
+    DocumentCard getEntryCard(DocumentEntry categoryEntry);
 
     /**
      * Get list of entry-related files
      * @param categoryEntry item metadata
      * @return list of items, describing item files
      */
-    List<ListItem> listEntryFiles(ListItem categoryEntry);
+    List<ListItem> listEntryFiles(DocumentEntry categoryEntry);
 
     /**
      * Get document lifecycle history
      * @param categoryEntry item metadata
      * @return list of history entries
      */
-    List<HistoryEntry> listENtryHistory(ListItem categoryEntry);
+    List<HistoryEntry> listEntryHistory(DocumentEntry categoryEntry);
 }
