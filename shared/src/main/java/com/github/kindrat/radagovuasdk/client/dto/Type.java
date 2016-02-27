@@ -1,16 +1,13 @@
 package com.github.kindrat.radagovuasdk.client.dto;
 
 public enum Type {
-    /**
-     * Постанова
-     */
-    DECREE,
-    /**
-     * Закон
-     */
-    LAW,
-    /**
-     * Звернення
-     */
-    APPEAL
+    DECREE("Постанова"),
+    LAW("Закон"),
+    APPEAL("Звернення");
+
+    private final String value;
+
+    Type(String value) {
+        this.value = value;
+    }
 }

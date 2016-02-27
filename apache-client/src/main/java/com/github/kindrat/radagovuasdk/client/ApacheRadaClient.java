@@ -81,19 +81,33 @@ public class ApacheRadaClient implements RadaClient {
     }
 
     @Override
-    public String getEntryContent(DocumentEntry categoryEntry) {
+    public DocumentMetadata getDocumentMetadata(DocumentEntry documentEntry) {
+        HttpGet get = new HttpGet(new UriSupplier(configuration.getBaseUri(), documentEntry.getUri()).get());
+        return doRequestAndParseResponse(get, entity -> {
+            Document document = ParsingUtil.wrapHttpEntity(entity);
+            Element holder = document.getElementsByClass("txt").stream()
+                    .findAny().orElseThrow(() -> new RestClientException("Could not find metadata holder"));
+            Element card = holder.getElementsByClass("nam").stream()
+                    .findAny().orElseThrow(() -> new RestClientException("Could not find card holder"));
+            return null;
+        });
+    }
+
+    @Override
+    public String getEntryContent(DocumentMetadata metadata) {
         return null;
     }
 
     @Override
-    public DocumentCard getEntryCard(DocumentEntry categoryEntry) {
+    public DocumentCard getEntryCard(DocumentMetadata metadata) {
         return null;
     }
 
     @Override
-    public RelatedDocsLink getLinkToRelatedDocs(DocumentEntry documentEntry) {
+    public RelatedDocsLink getLinkToRelatedDocs(DocumentMetadata metadata) {
         return null;
     }
+
 
     @Override
     public List<DocumentEntry> listEntryFiles(RelatedDocsLink relatedDocsLink) {
@@ -101,7 +115,7 @@ public class ApacheRadaClient implements RadaClient {
     }
 
     @Override
-    public List<HistoryEntry> listEntryHistory(DocumentEntry categoryEntry) {
+    public List<HistoryEntry> listEntryHistory(DocumentMetadata metadata) {
         return null;
     }
 

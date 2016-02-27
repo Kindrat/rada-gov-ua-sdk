@@ -19,26 +19,33 @@ public interface RadaClient {
     List<DocumentEntry> listCategory(ListItem category);
 
     /**
+     * All document metadata by document link
+     * @param documentEntry document
+     * @return metadata
+     */
+    DocumentMetadata getDocumentMetadata(DocumentEntry documentEntry);
+
+    /**
      * Get single document by its metadata
-     * @param categoryEntry item metadata
+     * @param metadata document metadata
      * @return document as a string (including html tags)
      */
-    String getEntryContent(DocumentEntry categoryEntry);
+    String getEntryContent(DocumentMetadata metadata);
 
     /**
      * Get single document metadata
-     * @param categoryEntry item metadata
+     * @param metadata item metadata
      * @return metadata
      */
-    DocumentCard getEntryCard(DocumentEntry categoryEntry);
+    DocumentCard getEntryCard(DocumentMetadata metadata);
 
     /**
      * Each document has a list (almost each) of other documents related to a same topic. Since this list is located
      * at a separate page under document page, there is a separate method to retrieve this link
-     * @param documentEntry item metadata
+     * @param metadata item metadata
      * @return link to related docs
      */
-    RelatedDocsLink getLinkToRelatedDocs(DocumentEntry documentEntry);
+    RelatedDocsLink getLinkToRelatedDocs(DocumentMetadata metadata);
 
     /**
      * Get list of entry-related files
@@ -49,8 +56,8 @@ public interface RadaClient {
 
     /**
      * Get document lifecycle history
-     * @param categoryEntry item metadata
+     * @param metadata item metadata
      * @return list of history entries
      */
-    List<HistoryEntry> listEntryHistory(DocumentEntry categoryEntry);
+    List<HistoryEntry> listEntryHistory(DocumentMetadata metadata);
 }
