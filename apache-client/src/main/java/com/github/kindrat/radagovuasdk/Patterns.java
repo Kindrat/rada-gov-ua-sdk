@@ -12,4 +12,6 @@ public class Patterns {
 
     public static final Pattern LINK_PATTERN = Pattern.compile("(href=\")(\\S+)(\"\\starget=\"_blank\">)" +
             "(<font\\scolor=\"#\\S{6}\">)?([A-Z\\s\\W\\d]+)(</)");
+
+    public static final Pattern DATE_PATTERN = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 }

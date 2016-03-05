@@ -1,0 +1,15 @@
+group 'com.github.kindrat.rada-gov-ua-sdk'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.assertj:assertj-core:3.3.0'
+}

@@ -1,7 +1,6 @@
 package com.github.kindrat.radagovuasdk.client.dto;
 
-import lombok.Data;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.List;
 
@@ -9,8 +8,11 @@ import java.util.List;
  * Mostly links, describing different document data
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 public class DocumentMetadata {
-    private String cardUri;
+    private DocumentCard documentCard;
     private String filesUri;
     private String historyUri;
     private String relatedDocsUri;

@@ -1,6 +1,7 @@
 package com.github.kindrat.radagovuasdk.client;
 
 import com.github.kindrat.radagovuasdk.client.dto.DocumentEntry;
+import com.github.kindrat.radagovuasdk.client.dto.DocumentMetadata;
 import com.github.kindrat.radagovuasdk.client.dto.ListItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,17 @@ public class ApacheRadaClientIT {
             List<DocumentEntry> categoryContent = client.listCategory(listItem);
             assertThat(categoryContent).isNotNull().isNotEmpty();
             print(listItem.getTitle(), categoryContent);
+        });
+    }
+
+    @Test
+    public void getDocumentMetadata() throws Exception {
+        List<ListItem> categories = client.listAllCategories();
+        List<DocumentEntry> documents = client.listCategory(categories.get(0));
+
+        documents.forEach(documentEntry -> {
+            DocumentMetadata metadata = client.getDocumentMetadata(documentEntry);
+            assertThat(metadata).isNotNull();
         });
     }
 }

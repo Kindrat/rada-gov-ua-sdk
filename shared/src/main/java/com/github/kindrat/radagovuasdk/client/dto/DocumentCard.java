@@ -1,16 +1,19 @@
 package com.github.kindrat.radagovuasdk.client.dto;
 
-import lombok.Data;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.Date;
-import java.util.EnumSet;
+import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 public class DocumentCard {
     @Singular
-    private EnumSet<Type> types;
-    private Publisher publisher;
+    private Set<Type> types;
+    @Singular
+    private Set<String> publishers;
     private Date date;
     private String regNumber;
     private State state;

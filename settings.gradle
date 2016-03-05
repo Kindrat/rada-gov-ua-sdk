@@ -1,4 +1,5 @@
 rootProject.name = 'rada-gov-ua-sdk'
 include 'shared'
 include 'apache-client'
+include 'testing'
 
